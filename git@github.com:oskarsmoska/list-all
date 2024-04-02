@@ -2,7 +2,7 @@
 - hosts: all
   tasks:
     - name: Liste aller installierten Pakete
-      command: yum list installed
+      command: dpkg --get-selections
       register: result
 
     - name: Zeige alle installierten Pakete
