@@ -1,0 +1,10 @@
+---
+- hosts: all
+  tasks:
+    - name: Liste aller installierten Pakete
+      command: yum list installed
+      register: result
+
+    - name: Zeige alle installierten Pakete
+      debug:
+        var: result.stdout_lines
