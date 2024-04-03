@@ -4,11 +4,10 @@
   become: yes  # Erlaube sudo-Berechtigungen
 
 - name: Copy a "sudoers" file on the remote machine for editing
-  ansible.builtin.copy:
+   copy:
     src: /tmp/nutanixtools
     dest: /tmp
     remote_src: yes
-    validate: /tmp/nutanixtools -csf %s
 
     - name: Führe das Setup-Skript mit Python 3 aus
       command: python3 /tmp/nutanixtools/installer/linux/install_ngt.py
