@@ -1,0 +1,18 @@
+---
+- name: Installation von Nutanix-Tols
+  hosts: deine_ziel_hosts
+  become: yes  # Erlaube sudo-Berechtigungen
+
+  tasks:
+    - name: Lade die Installationsdatei herunter
+      get_url:
+        url: "file:///pfad/zur/deine-installationsdatei/setup.py"
+        dest: "/tmp/deine-installationsdatei/setup.py"
+
+    - name: Führe das Setup-Skript mit Python 3 aus
+      command: python3 /tmp/deine-installationsdatei/setup.py
+
+    - name: Lösche die Installationsdatei
+      file:
+        path: "/tmp/deine-installationsdatei/setup.py"
+        state: absent
