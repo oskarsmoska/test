@@ -1,18 +1,16 @@
----
-- name: Installiere meine Anwendung
-  hosts: all
-  become: yes  # Erlaube sudo-Berechtigungen
+- name: Synchronisieren des Ordners auf entfernte Maschinen, Skript ausführen und danach Ordner löschen
+  hosts: Ihre_Zielhosts
+  tasks:
+    - name: Synchronisieren des Ordners 'nutanixtools'
+      synchronize:
+        src: /tmp/nutanixtools/
+        dest: /tmp/nutanixtools/
+        recursive: yes
 
-- name: Copy a "sudoers" file on the remote machine for editing
-   copy:
-    src: /tmp/nutanixtools
-    dest: /tmp
-    remote_src: yes
-
-    - name: Führe das Setup-Skript mit Python 3 aus
+    - name: Ausführen des Python-Skripts 'install_ngt.py'
       command: python3 /tmp/nutanixtools/installer/linux/install_ngt.py
 
-    - name: Lösche den Installationsordner
+    - name: Löschen des Ordners 'nutanixtools' auf den entfernten Maschinen
       file:
-        path: "/tmp/nutanixtools/"
+        path: /tmp/nutanixtools/
         state: absent
