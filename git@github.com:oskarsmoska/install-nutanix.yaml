@@ -1,6 +1,6 @@
 ---
 - name: Installiere meine Anwendung
-  hosts: deine_ziel_hosts
+  hosts: all
   become: yes  # Erlaube sudo-Berechtigungen
 
   tasks:
