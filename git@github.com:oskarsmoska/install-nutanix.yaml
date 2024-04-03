@@ -1,18 +1,18 @@
 ---
 - name: Installation von Nutanix-Tols
-  hosts: deine_ziel_hosts
+  hosts: all
   become: yes  # Erlaube sudo-Berechtigungen
 
   tasks:
-    - name: Lade die Installationsdatei herunter
-      get_url:
-        url: "file:///pfad/zur/deine-installationsdatei/setup.py"
-        dest: "/tmp/deine-installationsdatei/setup.py"
+    - name: Kopiere den gesamten Ordner
+      synchronize:
+        src: "/home/lxadmin/nutanixtools/"
+        dest: "/home/lxadmin/"
 
     - name: Führe das Setup-Skript mit Python 3 aus
-      command: python3 /tmp/deine-installationsdatei/setup.py
+      command: python3 /home/lxadmin/nutanixtools/installer/linux/install_ngt.py
 
-    - name: Lösche die Installationsdatei
+    - name: Lösche den Installationsordner
       file:
-        path: "/tmp/deine-installationsdatei/setup.py"
-        state: absent
+        path: "/home/lxadmin/nutanixtools"
+        state: absen
