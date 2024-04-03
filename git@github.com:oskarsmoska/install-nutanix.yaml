@@ -1,5 +1,5 @@
 - name: Synchronisieren des Ordners auf entfernte Maschinen, Skript ausführen und danach Ordner löschen
-  hosts: Ihre_Zielhosts
+  hosts: all
   tasks:
     - name: Synchronisieren des Ordners 'nutanixtools'
       synchronize:
