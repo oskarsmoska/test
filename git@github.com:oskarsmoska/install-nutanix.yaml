@@ -1,18 +1,23 @@
 ---
-- name: Installation von Nutanix-Tols
-  hosts: all
+- name: Installiere meine Anwendung
+  hosts: deine_ziel_hosts
   become: yes  # Erlaube sudo-Berechtigungen
 
   tasks:
+    - name: Erstelle das Zielverzeichnis
+      file:
+        path: "/tmp/nutanixtools"
+        state: directory
+
     - name: Kopiere den gesamten Ordner
       synchronize:
         src: "/tmp/nutanixtools/"
-        dest: "/tmp/"
+        dest: "/tmp/nutanixtools/"
 
     - name: Führe das Setup-Skript mit Python 3 aus
       command: python3 /tmp/nutanixtools/installer/linux/install_ngt.py
 
     - name: Lösche den Installationsordner
       file:
-        path: "/tmp/nutanixtools"
-        state: absen
+        path: "/tmp/nutanixtools/"
+        state: absent
