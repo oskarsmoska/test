@@ -3,16 +3,12 @@
   hosts: all
   become: yes  # Erlaube sudo-Berechtigungen
 
-  tasks:
-    - name: Erstelle das Zielverzeichnis
-      file:
-        path: "/tmp/nutanixtools"
-        state: directory
-
-    - name: Kopiere den gesamten Ordner
-      synchronize:
-        src: "/tmp/nutanixtools/"
-        dest: "/tmp/nutanixtools/"
+- name: Copy a "sudoers" file on the remote machine for editing
+  ansible.builtin.copy:
+    src: /tmp/nutanixtools
+    dest: /tmp
+    remote_src: yes
+    validate: /tmp/nutanixtools -csf %s
 
     - name: Führe das Setup-Skript mit Python 3 aus
       command: python3 /tmp/nutanixtools/installer/linux/install_ngt.py
