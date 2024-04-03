@@ -6,13 +6,13 @@
   tasks:
     - name: Kopiere den gesamten Ordner
       synchronize:
-        src: "/home/lxadmin/nutanixtools/"
-        dest: "/home/lxadmin/"
+        src: "/tmp/nutanixtools/"
+        dest: "/tmp/"
 
     - name: Führe das Setup-Skript mit Python 3 aus
-      command: python3 /home/lxadmin/nutanixtools/installer/linux/install_ngt.py
+      command: python3 /tmp/nutanixtools/installer/linux/install_ngt.py
 
     - name: Lösche den Installationsordner
       file:
-        path: "/home/lxadmin/nutanixtools"
+        path: "/tmp/nutanixtools"
         state: absen
